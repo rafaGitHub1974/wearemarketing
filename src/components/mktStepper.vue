@@ -2,22 +2,22 @@
   <v-container fluid ma-0 pa-0 fill-height mt-2 class="pa-0">
     <v-row no-gutters align="center" justify="center">
       <v-col cols="12" sm="12">
-        <v-stepper v-model="node" class="sm-12 elevation-0">
-          <v-stepper-header class="sm-12 stepper">
+        <v-stepper v-model="node" class="sm-12 elevation-0" alt-labels>
+          <v-stepper-header class="stepper">
             <v-stepper-step :complete="node > 1" step="1">
-              <small>Mis datos</small>
+              <small>{{$t('myData')}}</small>
             </v-stepper-step>
 
             <v-divider></v-divider>
 
             <v-stepper-step :complete="node > 2" step="2">
-              <small>Pago</small>
+              <small>{{$t('productPayment')}}</small>
             </v-stepper-step>
 
             <v-divider></v-divider>
 
             <v-stepper-step :complete="node === 3" step="3">
-              <small>Proceso finalizado</small>
+              <small>{{$t('endedProcess')}}</small>
             </v-stepper-step>
           </v-stepper-header>
 
@@ -27,7 +27,7 @@
               <v-row>
                 <v-col cols="12" sm="12" align="end">
                   <v-btn rounded color="primary" class="btn" dark @click="node = 2">
-                    Continuar
+                    {{$t('continue')}}
                     <v-icon right dark>mdi-arrow-right-bold-circle-outline</v-icon>
                   </v-btn>
                 </v-col>
@@ -40,12 +40,12 @@
                 <v-col cols="6" sm="6" align="center">
                   <v-btn outlined color="primary" class="btn" rounded @click="node = 1">
                     <v-icon left>mdi-arrow-left-bold-circle-outline</v-icon>
-                    Anterior
+                    {{$t('previous')}}
                   </v-btn>
                 </v-col>
                 <v-col cols="6" sm="6" align="center">
                   <v-btn rounded color="primary" class="btn" dark @click="getData()">
-                    Pagar
+                    {{$t('pay')}}
                     <v-icon right dark>mdi-arrow-right-bold-circle-outline</v-icon>
                   </v-btn>
                 </v-col>
@@ -71,23 +71,27 @@ export default {
   components: {
     mktComun
   },
-  data () {
-    return {
-      node: 1,
-      dataArray: [
+  computed: {
+    dataArray () {
+      return [
         {
           node: 1,
-          title: 'Mis datos',
-          text: 'Revisa los datos y completa aquellos pendientes antes de continuar con el proceso',
+          title: this.$t('myData'),
+          text: this.$t('textMyData'),
           img: ''
         },
         {
           node: 2,
-          title: 'Pago del producto',
-          text: 'Una vez efectuado el pago del producto, recibirás un email con los detalles de la compra',
+          title: this.$t('productPayment'),
+          text: this.$t('textProductPayment'),
           img: 'mdi-credit-card-multiple-outline'
         }
       ]
+    }
+  },
+  data () {
+    return {
+      node: 1
     }
   },
   methods: {
