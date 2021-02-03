@@ -20,7 +20,7 @@
         <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
           <v-list-item v-for="item in items" :key="item.title" link>
             <v-list-item-icon>
-              <v-icon @click.native="$router.push({ name: 'mktStepper' })">{{item.icon}}</v-icon>
+              <v-icon @click="$router.push({ name: 'mktStepper' })">{{item.icon}}</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content class="text-left">

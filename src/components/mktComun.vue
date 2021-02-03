@@ -9,16 +9,26 @@
     </v-row>
 
     <v-container fill-height fluid v-if="dataNode && dataNode.node == 1">
-      <v-row align="center" justify="center">
-        <v-col cols="12" sm="12">
-          <v-text-field :label="$t('name')" v-model="customerData.name"></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row align="center" justify="center">
-        <v-col cols="12" sm="12">
-          <v-text-field :label="$t('surnames')" v-model="customerData.surnames"></v-text-field>
-        </v-col>
-      </v-row>
+      <ValidationObserver ref="observer" v-slot="{ validate }">
+        <form @submit.prevent="validate().then(submit)">
+          <!-- Vee-validate comprueba que el campo es requerido y con un máximo de 10 caracteres -->
+          <!-- De forma predeterminada ValidationProvider contiene un tag span que muestra el mensaje de error si no se cumple la validación -->
+          <ValidationProvider :name="$t('name')" rules="required|max:10" v-slot="{ errors, valid }">
+            <v-row align="center" justify="center">
+              <v-col cols="12" sm="12">
+                <v-text-field :label="$t('name')" v-model="customerData.name" :error-messages="errors" :success="valid"></v-text-field>
+              </v-col>
+            </v-row>
+          </ValidationProvider>
+          <ValidationProvider :name="$t('surnames')" rules="required|max:10" v-slot="{ errors, valid }">
+            <v-row align="center" justify="center">
+              <v-col cols="12" sm="12">
+                <v-text-field :label="$t('surnames')" v-model="customerData.surnames" :error-messages="errors" :success="valid"></v-text-field>
+              </v-col>
+            </v-row>
+          </ValidationProvider>
+        </form>
+      </ValidationObserver>
     </v-container>
 
     <v-card class="mt-3" v-if="dataNode && dataNode.node == 2">
@@ -36,12 +46,19 @@
         </v-row>
       </v-card-text>
     </v-card>
+
   </v-container>
 </template>
 
 <script>
+import {ValidationObserver, ValidationProvider} from 'vee-validate'
+
 export default {
   name: 'mktComun',
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   props: {
     dataNode: {
       type: Object,
@@ -51,6 +68,17 @@ export default {
   data () {
     return {
       customerData: {}
+    }
+  },
+  methods: {
+    async submit () {
+      // Comprobamos con una llamada asíncrona si se cumplen las validaciones del formulario
+      const isValid = await this.$refs.observer.validate()
+      if (isValid) {
+        this.$emit('nextNode')
+      } else if (!isValid) {
+        console.log('Error no se han cumplido las validaciones del formulario')
+      }
     }
   }
 }

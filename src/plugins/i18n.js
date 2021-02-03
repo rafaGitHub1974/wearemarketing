@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
+import validationMessagesEn from 'vee-validate/dist/locale/en'
+import validationMessagesEs from 'vee-validate/dist/locale/es'
+import validationMessagesFr from 'vee-validate/dist/locale/fr'
 Vue.use(VueI18n)
 
 const messages = {
@@ -24,7 +27,9 @@ const messages = {
     help: 'Ayuda',
     signIn: 'Registrarse',
     language: 'Idioma',
-    close: 'Cerrar'
+    close: 'Cerrar',
+    required: 'El campo no puede estar vacío111',
+    validations: validationMessagesEs
   },
   en: {
     spanish: 'Spanish',
@@ -47,7 +52,9 @@ const messages = {
     help: 'Help',
     signIn: 'Sign in',
     language: 'Language',
-    close: 'Close'
+    close: 'Close',
+    required: 'The field cannot be empty',
+    validations: validationMessagesEn
   },
   fr: {
     spanish: 'Espagnol',
@@ -70,7 +77,9 @@ const messages = {
     help: 'Aidez-moi',
     signIn: 'Enregistreur',
     language: 'Langage',
-    close: 'Fermer'
+    close: 'Fermer',
+    required: 'Le champ ne peut pas être vide',
+    validations: validationMessagesFr
   }
 }
 

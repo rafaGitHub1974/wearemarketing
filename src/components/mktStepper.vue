@@ -23,10 +23,10 @@
 
           <v-stepper-items>
             <v-stepper-content step="1">
-              <mkt-comun :dataNode="dataArray[0]"> </mkt-comun>
+              <mkt-comun ref="continue" :dataNode="dataArray[0]" @nextNode="node = 2"> </mkt-comun>
               <v-row>
                 <v-col cols="12" sm="12" align="end">
-                  <v-btn rounded color="primary" class="btn" dark @click="node = 2">
+                  <v-btn rounded color="primary" class="btn" dark @click="$refs.continue.submit()">
                     {{$t('continue')}}
                     <v-icon right dark>mdi-arrow-right-bold-circle-outline</v-icon>
                   </v-btn>
