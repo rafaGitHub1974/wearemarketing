@@ -42,7 +42,7 @@ npm run build
 
 npm run build --report
 
-## Para ejecutar prueba unitaria
+## Para ejecutar pruebas unitarias
 
 npm run unit
 
