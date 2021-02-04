@@ -18,7 +18,7 @@ npm install -g vue-cli
 # Elijan la carpeta donde quiera clonar
 cd my-project-path
 
-# Corramos el comando para clonar
+# Ejecute el siguiente comando para clonar
 git clone https://github.com/rafaGitHub1974/wearemarketing.git
 cd my-project
 
