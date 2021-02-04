@@ -1,27 +1,55 @@
-# wearemark
+# Prueba We Are Marketing
 
-> Prueba we are marketing
+## Librerías utilizadas en el proyecto
 
-## Build Setup
+> Webpack + Vuetify + Vee-validate + Multidioma (i18n) + Axios
 
-``` bash
-# install dependencies
-npm install
+## Requisitos previos
 
-# serve with hot reload at localhost:8080
-npm run dev
+Debemos tener instalado el client de Vue para que pueda compilar las extensiones .vue.
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+```bash
+npm install -g vue-cli
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Clonando el repositorio
+
+```bash
+# Elijan la carpeta donde quiera clonar
+cd my-project-path
+
+# Corramos el comando para clonar
+git clone https://github.com/rafaGitHub1974/wearemarketing.git
+cd my-project
+
+# Instalamos las dependencias
+npm install
+```
+
+## Compilando nuestros componentes
+
+Si ya tienes todo listo ahora debemos compilar los componentes. Tenemos 2 entornos uno de DEV (para pruebas) el cual creará un servidor local para poder probar los componentes y luego el BUILD que será el de producción creando un archivo .js que deberemos agregar a nuestro proyecto final.
+
+```bash
+# Crea un servidor local para que puedas probar tus componentes
+npm run dev
+
+# Genera los javascripts
+npm run build
+```
+
+## build for production and view the bundle analyzer report
+
+npm run build --report
+
+## Para ejecutar prueba unitaria
+
+npm run unit
+
+## Para ejecutar todas las pruebas
+
+npm test
+
+```
+
+```
