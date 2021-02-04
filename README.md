@@ -38,8 +38,7 @@ npm run dev
 npm run build
 ```
 
-## build for production and view the bundle analyzer report
-## Compila en producción y visualiza el informe del analizador de paquetes
+## Para compilar en producción y visualizar el informe del analizador de paquetes
 
 npm run build --report
 
