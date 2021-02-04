@@ -49,5 +49,3 @@ npm run unit
 ## Para ejecutar todas las pruebas
 
 npm test
-
-```
