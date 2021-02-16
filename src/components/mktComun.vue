@@ -8,21 +8,21 @@
       </v-col>
     </v-row>
 
-    <v-container fill-height fluid v-if="dataNode && dataNode.node == 1">
+    <v-container fluid v-if="dataNode && dataNode.node == 1">
       <ValidationObserver ref="observer" v-slot="{ validate }">
-        <form @submit.prevent="validate().then(submit)">
+        <form @submit.prevent="validate().then(submit)" >
           <!-- Vee-validate comprueba que el campo es requerido y con un máximo de 10 caracteres -->
           <!-- De forma predeterminada ValidationProvider contiene un tag span que muestra el mensaje de error si no se cumple la validación -->
           <ValidationProvider :name="$t('name')" rules="required|max:10" v-slot="{ errors, valid }">
             <v-row align="center" justify="center">
-              <v-col cols="12" sm="12">
+              <v-col cols="12" sm="12" md="6">
                 <v-text-field :label="$t('name')" v-model="customerData.name" :error-messages="errors" :success="valid"></v-text-field>
               </v-col>
             </v-row>
           </ValidationProvider>
           <ValidationProvider :name="$t('surnames')" rules="required|max:10" v-slot="{ errors, valid }">
             <v-row align="center" justify="center">
-              <v-col cols="12" sm="12">
+              <v-col cols="12" sm="12" md="6">
                 <v-text-field :label="$t('surnames')" v-model="customerData.surnames" :error-messages="errors" :success="valid"></v-text-field>
               </v-col>
             </v-row>
@@ -35,7 +35,7 @@
       <v-card-text v-if="dataNode && dataNode.node == 2" class="text--primary">
         <v-icon v-if="dataNode && dataNode.img && dataNode.node === 2">{{dataNode.img}}</v-icon>
           <h2 class="mt-4">{{$t('creditCard')}}</h2>
-          <p class="mt-2">{{$t('textCreditCard')}}</p>
+          <p class="mt-2 textCreditCard">{{$t('textCreditCard')}}</p>
         <v-row>
           <v-col cols="6" sm="6" align="right">
             <img style="width: 40px;" src="../assets/visa.png" />
@@ -84,8 +84,8 @@ export default {
 }
 </script>
 
-<style scoped>
-  p {
+<style>
+  /* p {
     font-size: 12px;
-  }
+  } */
 </style>

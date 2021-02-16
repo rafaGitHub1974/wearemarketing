@@ -110,10 +110,10 @@ export default {
 </script>
 
 <style scoped>
-  .btn {
+  /* .btn {
     text-transform: none !important;
   }
   .stepper {
     background-color: #d3d3d3;
-  }
+  } */
 </style>
