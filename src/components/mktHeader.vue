@@ -111,7 +111,7 @@ export default {
     showMenu: false,
     group: null,
     text: '',
-    timeout: 2000
+    timeout: 3000
   }),
   methods: {
     changeLanguage (item) {
@@ -119,6 +119,7 @@ export default {
       this.showMenu = false
       this.text = this.$t('textChangeLanguageTo') + ' ' + this.$t(item.textLanguage).toLowerCase()
       this.snackbar = true
+      this.$store.commit('setLanguage', item.locale)
     }
   }
 }
