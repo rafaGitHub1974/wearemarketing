@@ -11,18 +11,18 @@
     <v-container fluid v-if="dataNode && dataNode.node == 1">
       <ValidationObserver ref="observer" v-slot="{ validate }">
         <form @submit.prevent="validate().then(submit)" >
-          <!-- Vee-validate comprueba que el campo es requerido y con un máximo de 10 caracteres -->
+          <!-- Vee-validate comprueba que el campo es requerido y con un máximo de 20 caracteres -->
           <!-- De forma predeterminada ValidationProvider contiene un tag span que muestra el mensaje de error si no se cumple la validación -->
-          <ValidationProvider :name="$t('name')" rules="required|max:10" v-slot="{ errors, valid }">
+          <ValidationProvider :name="$t('name')" rules="required|max:20" v-slot="{ errors, valid }">
             <v-row align="center" justify="center">
-              <v-col cols="12" sm="12" md="6">
+              <v-col cols="12" sm="12" md="4">
                 <v-text-field :label="$t('name')" v-model="customerData.name" :error-messages="errors" :success="valid"></v-text-field>
               </v-col>
             </v-row>
           </ValidationProvider>
-          <ValidationProvider :name="$t('surnames')" rules="required|max:10" v-slot="{ errors, valid }">
+          <ValidationProvider :name="$t('surnames')" rules="required|max:20" v-slot="{ errors, valid }">
             <v-row align="center" justify="center">
-              <v-col cols="12" sm="12" md="6">
+              <v-col cols="12" sm="12" md="4">
                 <v-text-field :label="$t('surnames')" v-model="customerData.surnames" :error-messages="errors" :success="valid"></v-text-field>
               </v-col>
             </v-row>

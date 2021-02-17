@@ -1,29 +1,29 @@
 <template>
   <v-container fluid ma-0 pa-0 fill-height mt-2 class="pa-0">
     <v-row no-gutters align="center" justify="center">
-      <v-col cols="12" sm="12">
+      <v-col cols="12" sm="12" >
         <v-stepper v-model="node" class="sm-12 elevation-0" alt-labels>
           <v-stepper-header class="stepper">
-            <v-stepper-step :complete="node > 1" step="1">
+            <v-stepper-step :complete="node > 1" step="1" @click.native="checkAction(1)">
               <small>{{$t('myData')}}</small>
             </v-stepper-step>
 
             <v-divider></v-divider>
 
-            <v-stepper-step :complete="node > 2" step="2">
+            <v-stepper-step :complete="node > 2" step="2" @click.native="checkAction(2)">
               <small>{{$t('productPayment')}}</small>
             </v-stepper-step>
 
             <v-divider></v-divider>
 
-            <v-stepper-step :complete="node === 3" step="3">
+            <v-stepper-step :complete="node === 3" step="3" @click.native="checkAction(3)">
               <small>{{$t('endedProcess')}}</small>
             </v-stepper-step>
           </v-stepper-header>
 
           <v-stepper-items>
             <v-stepper-content step="1">
-              <mkt-comun ref="continue" :dataNode="dataArray[0]" @nextNode="node = 2"> </mkt-comun>
+              <mkt-comun ref="continue" :dataNode="cDataArray[0]" @nextNode="node = 2"> </mkt-comun>
               <v-row>
                 <v-col cols="12" sm="12" align="end">
                   <v-btn rounded color="primary" class="btn" dark @click="$refs.continue.submit()">
@@ -35,7 +35,7 @@
             </v-stepper-content>
 
             <v-stepper-content step="2">
-              <mkt-comun :dataNode="dataArray[1]"> </mkt-comun>
+              <mkt-comun :dataNode="cDataArray[1]"> </mkt-comun>
               <v-row class="mt-1">
                 <v-col cols="6" sm="6" align="center">
                   <v-btn outlined color="primary" class="btn" rounded @click="node = 1">
@@ -53,7 +53,7 @@
             </v-stepper-content>
 
             <v-stepper-content step="3">
-              <mkt-comun v-if="dataArray.length === 3" :dataNode="dataArray[2]"> </mkt-comun>
+              <mkt-comun v-if="cDataArray.length === 3" :dataNode="cDataArray[2]"> </mkt-comun>
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
@@ -71,22 +71,19 @@ export default {
   components: {
     mktComun
   },
+  watch: {
+    cLanguage: {
+      handler () {
+        this.translateDatarray()
+      }
+    }
+  },
   computed: {
-    dataArray () {
-      return [
-        {
-          node: 1,
-          title: this.$t('myData'),
-          text: this.$t('textMyData'),
-          img: ''
-        },
-        {
-          node: 2,
-          title: this.$t('productPayment'),
-          text: this.$t('textProductPayment'),
-          img: 'mdi-credit-card-multiple-outline'
-        }
-      ]
+    cDataArray () {
+      return this.$store.getters.getDataArray
+    },
+    cLanguage () {
+      return this.$store.getters.getLanguage
     }
   },
   data () {
@@ -101,19 +98,46 @@ export default {
         result.node = 3
         // Sobreescribimos el atributo img
         result.img = 'mdi-certificate'
-        this.dataArray.push(result)
+        let copyDataArray = [...this.cDataArray]
+        if (copyDataArray.length === 3) {
+          this.$set(copyDataArray, 2, result)
+        } else {
+          copyDataArray.push(result)
+          this.$store.commit('setDataArray', copyDataArray)
+        }
         this.node = 3
       })
+    },
+    translateDatarray (node) {
+      this.$store.commit('setDataArray', this.cDataArray)
+    },
+
+    checkAction (node) {
+      switch (node) {
+        case 1:
+          if (this.node > 1) {
+            this.node = 1
+          }
+          break
+
+        case 2:
+          if (this.node > 2) {
+            this.node = 2
+          } else {
+            this.$refs.continue.submit()
+          }
+          break
+
+        case 3:
+          if (this.node === 2) {
+            this.getData()
+          }
+          break
+
+        default:
+          break
+      }
     }
   }
 }
 </script>
-
-<style scoped>
-  /* .btn {
-    text-transform: none !important;
-  }
-  .stepper {
-    background-color: #d3d3d3;
-  } */
-</style>
