@@ -51,9 +51,9 @@
           </template>
 
           <v-list-item v-for="child in item.items" :key="child.title">
-            <v-list-item-icon @click="changeLanguage(child)">
-              <v-icon>{{ child.icon }}</v-icon>
-            </v-list-item-icon>
+            <v-list-item-avatar @click="changeLanguage(child)">
+              <v-img max-height="25" max-width="25" :src="getImagen(child.icon)"></v-img>
+            </v-list-item-avatar>
             <v-list-item-content @click="changeLanguage(child)" class="text-left">
               <v-list-item-title v-text="child.title"></v-list-item-title>
             </v-list-item-content>
@@ -84,21 +84,24 @@ export default {
               option: 1,
               title: this.$t('spanish'),
               textLanguage: 'spanish',
-              icon: 'mdi-flag-variant-outline',
+              // icon: 'mdi-flag-variant-outline',
+              icon: require('@/assets/espana.png'),
               locale: 'es'
             },
             {
               option: 2,
               title: this.$t('english'),
               textLanguage: 'english',
-              icon: 'mdi-flag-variant-outline',
+              // icon: 'mdi-flag-variant-outline',
+              icon: require('@/assets/inglaterra.png'),
               locale: 'en'
             },
             {
               option: 3,
               title: this.$t('french'),
               textLanguage: 'french',
-              icon: 'mdi-flag-variant-outline',
+              // icon: 'mdi-flag-variant-outline',
+              icon: require('@/assets/francia.png'),
               locale: 'fr'
             }
           ]
@@ -120,6 +123,15 @@ export default {
       this.text = this.$t('textChangeLanguageTo') + ' ' + this.$t(item.textLanguage).toLowerCase()
       this.snackbar = true
       this.$store.commit('setLanguage', item.locale)
+    },
+    // Muestra la imagen del producto
+    getImagen (imagen) {
+      const path = require('path')
+      if (imagen) {
+        return imagen
+      } else {
+        return path
+      }
     }
   }
 }
