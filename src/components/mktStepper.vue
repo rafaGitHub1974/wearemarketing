@@ -75,6 +75,9 @@ export default {
     cLanguage: {
       handler () {
         this.translateDatarray()
+        if (this.node === 3) {
+          this.node = 1
+        }
       }
     }
   },

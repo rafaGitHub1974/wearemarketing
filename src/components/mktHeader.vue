@@ -33,14 +33,7 @@
       <v-divider></v-divider>
 
       <v-list nav dense>
-        <v-list-group
-          v-for="item in itemsLanguaje"
-          :key="item.title"
-          v-model="item.active"
-          :prepend-icon="item.action"
-          no-action
-          active-class="deep-purple--text text--accent-4"
-        >
+        <v-list-group v-for="item in itemsLanguaje" :key="item.title" v-model="item.active" :prepend-icon="item.action" no-action active-class="deep-purple--text text--accent-4">
           <template v-slot:activator>
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -84,7 +77,6 @@ export default {
               option: 1,
               title: this.$t('spanish'),
               textLanguage: 'spanish',
-              // icon: 'mdi-flag-variant-outline',
               icon: require('@/assets/espana.png'),
               locale: 'es'
             },
@@ -92,7 +84,6 @@ export default {
               option: 2,
               title: this.$t('english'),
               textLanguage: 'english',
-              // icon: 'mdi-flag-variant-outline',
               icon: require('@/assets/inglaterra.png'),
               locale: 'en'
             },
@@ -100,7 +91,6 @@ export default {
               option: 3,
               title: this.$t('french'),
               textLanguage: 'french',
-              // icon: 'mdi-flag-variant-outline',
               icon: require('@/assets/francia.png'),
               locale: 'fr'
             }
